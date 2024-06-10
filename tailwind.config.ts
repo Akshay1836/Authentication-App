@@ -7,6 +7,7 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     flowbite.content(),
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       backgroundImage: {

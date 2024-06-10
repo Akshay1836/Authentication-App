@@ -19,9 +19,9 @@ function Login() {
       e.preventDefault();
       
       const response = await axios.post("/api/users/login", user);
-      console.log("data is :" +response.data);
+      console.log("data is :" +response.data.token);
       if (response.data.success) {
-        router.push("/");
+        router.push("/user");
         console.log("login succesfull");
         toast.success("login succesfull");
       } else {
@@ -34,7 +34,9 @@ function Login() {
     }
   };
   return (
-    <section className="bg-white ">
+    <div className="flex items-center justify-center h-screen bg-gray-200">
+    <div className="container">
+        <div className="bg-white rounded-lg shadow-lg p-5 md:p-6 mx-2"></div>
       <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
         <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md h-screen">
           <div className="mb-2 flex justify-center">
@@ -51,24 +53,24 @@ function Login() {
               ></path>
             </svg>
           </div>
-          <h2 className="text-center text-2xl font-bold leading-tight text-black">
+          <h2 className="text-center text-2xl  font-bold leading-tight text-indigo-600">
             Sign up to create account
           </h2>
           <p className="mt-2 text-center text-base text-gray-600">
-            Already have an account?{" "}
-            <a
-              href="#"
+           No account?{" "}
+            <Link
+             href={"/signup"}
               title=""
-              className="font-medium text-black transition-all duration-200 hover:underline"
+              className="font-medium text-indigo-600 transition-all duration-200 hover:underline"
             >
               Sign In
-            </a>
+            </Link>
           </p>
           <form  className="mt-8">
             <div className="space-y-5">
               
               <div>
-                <label className="text-base font-medium text-gray-900">
+                <label className="text-base font-medium text-indigo-600">
                   {" "}
                   Email address{" "}
                 </label>
@@ -78,7 +80,7 @@ function Login() {
                     onChange={(e) =>
                       SetUser({ ...user, email: e.target.value })
                     }
-                    className="flex h-10 w-full rounded-md border border-gray-300  px-3 py-2 text-sm text-black focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="flex h-10 w-full rounded-md border border-gray-300  px-3 py-2 text-sm text-indigo-600 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                     type="email"
                     placeholder="Email"
                     id="email"
@@ -87,7 +89,7 @@ function Login() {
               </div>
               <div>
                 <div className="flex items-center justify-between">
-                  <label className="text-base font-medium text-gray-900">
+                  <label className="text-base font-medium text-indigo-600">
                     {" "}
                     Password{" "}
                   </label>
@@ -109,9 +111,9 @@ function Login() {
                 <button
                   type="submit"
                   onClick={HandleSubmit}
-                  className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
+                  className="inline-flex w-full items-center justify-center rounded-md bg-indigo-600 px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
                 >
-                  Create Account{" "}
+                  Login{" "}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -129,7 +131,7 @@ function Login() {
             </div>
           </form>
           <div className="mt-3 space-y-3">
-            <button
+            {/* <button
               type="button"
               className="relative inline-flex w-full items-center justify-center rounded-md border border-gray-400 bg-white px-3.5 py-2.5 font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none"
             >
@@ -144,7 +146,7 @@ function Login() {
                 </svg>
               </span>
               Sign up with Google
-            </button>
+            </button> */}
             <Link href="/signup"
               type="button"
               className="relative inline-flex w-full items-center justify-center rounded-md border border-gray-400 bg-white px-3.5 py-2.5 font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none"
@@ -164,7 +166,10 @@ function Login() {
           </div>
         </div>
       </div>
-    </section>
+      </div>
+      </div>
+      
+
   );
 }
 
