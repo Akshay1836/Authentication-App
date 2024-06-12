@@ -1,11 +1,14 @@
 "use client";
 import axios from "axios";
+import { log } from "console";
 import { useRouter } from "next/navigation";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 function page() {
+  const [user,setUser]:any=useState("");
+  const [show,setShow]=useState(false)
   const router = useRouter();
   const logout = async () => {
     try {
@@ -17,6 +20,17 @@ function page() {
       console.log(error);
     }
   };
+  const getData=async()=>{
+    const responses=await axios.get("/api/users/me");
+    console.log(responses);
+    console.log(responses.data.user.username)
+    setUser(responses.data.user.username)
+    
+    
+  }
+  useEffect(()=>{
+   getData();
+  },[])
 
   return (
     <section className="mb-2 border  p-4 rounded-lg max-w-full bg-neutral-100 flex justify-center items-center h-screen">
@@ -29,8 +43,8 @@ function page() {
             />
           </div>
           <div className="flex-grow text-center md:text-left text-gray-800">
-            <p className="font-bold">Senior Developer</p>
-            <h3 className="text-xl heading">John Doe</h3>
+            {/* <p className="font-bold">{user.email}</p> */}
+            <h3 className="text-xl heading ">{show ? user:"Nothing"}</h3>
             <p className="mt-2 mb-3">
               John is a Senior Developer, mainly works in backend technologies.
             </p>
@@ -50,9 +64,15 @@ function page() {
       </div>
       <button
         onClick={logout}
-        className="text-red-400 bg-red-800 p-4 rounded-xl"
+        className="text-red-400 bg-red-800 p-4 mx-3 rounded-xl"
       >
         Logout
+      </button>
+      <button
+        onClick={()=>setShow(!show)}
+        className="text-red-400 bg-red-800 p-4 rounded-xl"
+      >
+        Show
       </button>
     </section>
   );
